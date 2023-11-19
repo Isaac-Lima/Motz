@@ -14,10 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $usuario = $_POST['usuario'];
         $email = $_POST['email'];
         $senha = $_POST['senha'];
+        $categoria = $_POST['categoria'];
 
         // Instrução preparada para evitar SQL injection
-        $sql = $conexao->prepare("INSERT INTO cadastro (usuario, email, senha) VALUES (?, ?, ?)");
-        $sql->bind_param("sss", $usuario, $email, $senha);
+        $sql = $conexao->prepare("INSERT INTO cadastro (usuario, email, senha, categoria) VALUES (?, ?, ?, ?)");
+        $sql->bind_param("ssss", $usuario, $email, $senha, $categoria);
 
         if ($sql->execute()) {
             header('location: index.php?');
@@ -126,22 +127,40 @@ $conexao->close();
                         <form action="cadastros.php" method="POST" class="mt-5">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nome de usuário</label>
-                                <input type="text" name="usuario" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="nome1" required required>
+                                <input type="text" name="usuario" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="nome1" required>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="nome@gmail.com" required required>
+                                <input type="email" name="email" class="form-control text-indent shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" placeholder="nome@gmail.com" required>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Senha</label>
                                 <div class="d-flex position-relative">
-                                    <input type="password" name="senha" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" required required>
+                                    <input type="password" name="senha" class="form-control text-indent auth__password shadow-sm bg-grey-light border-0 rounded-pill fw-lighter fs-7 p-3" required>
                                     <span class="password__icon text-primary fs-4 fw-bold bi bi-eye-slash"></span>
                                 </div>
                             </div>
-                            <div class="col text-center">
-                                <button type="submit" name="submit" class="btn btn-outline-dark btn-lg rounded-pill mt-4 w-100">Cadastre-se</button>
+                            <label for="categoria" class="mt-3 mb-1">Selecione sua categoria:</label>
+                            <!-- Inputs radio -->
+                            <div class="form-check d-inline-flex">
+                                <input class="form-check-input" type="radio" name="categoria" id="flexRadioEmbarcador" value="Embarcador" checked>
+                                <label class="form-check-label" for="flexRadioEmbarcador">
+                                    Embarcador
+                                </label>
                             </div>
+
+                            <div class="form-check d-inline-flex">
+                                <input class="form-check-input" type="radio" name="categoria" id="flexRadioMotorista" value="Motorista">
+                                <label class="form-check-label" for="flexRadioMotorista">
+                                    Motorista
+                                </label>
+                            </div>
+
+                            <!-- Botão de cadastro -->
+                            <div class="col text-center mt-4">
+                                <button type="submit" name="submit" class="btn btn-outline-dark btn-lg rounded-pill w-100">Cadastre-se</button>
+                            </div>
+
                         </form>
                         <p class="mt-5 text-center">Ou cadastre-se com suas redes sociais</p>
                         <div class="row text-center">
