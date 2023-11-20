@@ -1,0 +1,12 @@
+.logo-img {
+    width: 100px;
+    height: auto;
+}
+
+.nav-btn{
+    background-color: #FF6511;
+}
+
+.nav-btn:hover{
+    background-color: #E65500;
+}

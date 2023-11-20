@@ -55,6 +55,9 @@
                             <li class="nav-item mx-2">
                                 <a class="nav-link active" href="embarcadores.php">Embarcadores</a>
                             </li>
+                            <li class="nav-item mx-2">
+                                <a class="nav-link" href="cargas.php">Cadastro de cargas</a>
+                            </li>
                         </ul>
                         <!--Login/Cadastro-->
                         <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
