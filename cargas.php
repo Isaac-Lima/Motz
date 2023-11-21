@@ -1,3 +1,34 @@
+<?php
+include_once('conexao.php');
+
+
+$sql = "SELECT * FROM cargas ORDER BY id DESC";
+
+$result = $conexao->query($sql);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Verifica se as variáveis do formulário estão definidas
+    if (isset($_POST['desc']) && isset($_POST['valor']) && isset($_POST['tipo'])) {
+        // Recupera os dados do formulário
+        $desc = $_POST['desc'];
+        $amount = $_POST['valor'];
+        $type = $_POST['tipo'];
+
+        // Instrução preparada para evitar SQL injection
+        $sql = $conexao->prepare("INSERT INTO cargas (descricao, valor, tipo) VALUES ( ?, ?, ?)");
+        $sql->bind_param("sss", $desc, $amount, $type);
+
+        if ($sql->execute()) {
+            echo "<script>alert('Dados incluídos com sucesso');</script>";            
+        } else {
+            echo "<script>alert('Erro na inclusão dos dados');</script>";        }
+
+        $sql->close();
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -70,11 +101,67 @@
             </div>
         </nav>
     </header>
-    <main>
-        <div class="container register_form">
-            
+    <main class="container mt-5">
+        <!-- rent information -->
+        <div class="resume">
+            <div class="col">
+                Entradas: R$ <span class="incomes">0.00</span>
+            </div>
+            <div class="col">
+                Saídas: R$ <span class="expenses">0.00</span>
+            </div>
+            <div class="col">
+                Total: R$ <span class="total">0.00</span>
+            </div>
+        </div>
+        <!-- input section -->
+        <form action="cargas.php" method="post">
+            <div class="newItem row">
+                <div class="col">
+                    <label for="desc">Descrição</label>
+                    <input type="text" name="desc" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="amount">Valor</label>
+                    <input type="number" name="valor" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="type">Tipo</label>
+                    <select name="tipo" class="form-select">
+                        <option value="Entrada">Entrada</option>
+                        <option value="Saída">Saída</option>
+                    </select>
+                </div>
+                <button id="btnNew" class="btn btn-primary w-25">Incluir</button>
+            </div>
+        </form>
+
+        <!-- products information -->
+        <div class="divTable mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Descrição</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">...</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        while($user_data = mysqli_fetch_assoc($result)){
+                            echo "<tr>";
+                            echo "<td>" .$user_data['id']."</td>";
+                            echo "<td>" .$user_data['descricao']."</td>";
+                            echo "<td>" .$user_data['valor']."</td>";
+                            echo "<td>" .$user_data['tipo']."</td>";
+                            echo "<td>" .$user_data['acoes']."</td>";
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </main>
-    
 </body>
 </html>
