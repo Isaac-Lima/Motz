@@ -9,7 +9,7 @@ include_once('conexao.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se as variáveis do formulário estão definidas
-    if (isset($_POST['usuario']) && isset($_POST['email']) && isset($_POST['senha'])) {
+    if (isset($_POST['usuario']) && isset($_POST['email']) && isset($_POST['senha']) && isset($_POST['categoria'])) {
         // Recupera os dados do formulário
         $usuario = $_POST['usuario'];
         $email = $_POST['email'];

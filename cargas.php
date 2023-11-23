@@ -119,11 +119,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="newItem row">
                 <div class="col">
                     <label for="desc">Descrição</label>
-                    <input type="text" name="desc" class="form-control">
+                    <input type="text" name="desc" class="form-control" required>
                 </div>
                 <div class="col">
                     <label for="amount">Valor</label>
-                    <input type="number" name="valor" class="form-control">
+                    <input type="number" name="valor" class="form-control" required>
                 </div>
                 <div class="col">
                     <label for="type">Tipo</label>
@@ -163,5 +163,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </table>
         </div>
     </main>
+    <script src="./js/cargas.js"></script>
 </body>
 </html>
