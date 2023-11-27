@@ -73,7 +73,7 @@
         </nav>
         <div class="hero-content">
             <h1>Bem vindo(a) à Motz</h1>
-            <p>A transportadora da Valorantim Cimentos que já chega carregada de oportunidades</p>
+            <p>A transportadora da Votorantim Cimentos que já chega carregada de oportunidades</p>
         </div>
     </header>
     <main>

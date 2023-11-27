@@ -19,9 +19,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql->bind_param("sss", $desc, $amount, $type);
 
         if ($sql->execute()) {
-            echo "<script>alert('Dados incluídos com sucesso');</script>";            
+            header('location:cargas.php');
+            exit();         
         } else {
-            echo "<script>alert('Erro na inclusão dos dados');</script>";        }
+            echo "<script>alert('Erro na inclusão dos dados');</script>";        
+        }
 
         $sql->close();
     }
@@ -117,19 +119,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- input section -->
         <form action="cargas.php" method="post">
             <div class="newItem row">
-                <div class="col">
-                    <label for="desc">Descrição</label>
+                <div class="col-lg-3">
+                    <label for="desc">Descrição da carga</label>
                     <input type="text" name="desc" class="form-control" required>
                 </div>
-                <div class="col">
-                    <label for="amount">Valor</label>
-                    <input type="number" name="valor" class="form-control" required>
+                <div class="col-lg-3">
+                    <label for="amount">Valor da viagem</label>
+                    <input type="text" name="valor" class="form-control" required>
                 </div>
                 <div class="col">
-                    <label for="type">Tipo</label>
+                    <label for="type">Tipo da carga</label>
                     <select name="tipo" class="form-select">
-                        <option value="Entrada">Entrada</option>
-                        <option value="Saída">Saída</option>
+                        <option value="Contêiner">Contêiner</option>
+                        <option value="Frágil">Frágil</option>
+                        <option value="Geral">Carga geral</option>
+                        <option value="Perigosa">Perigosa</option>
                     </select>
                 </div>
                 <button id="btnNew" class="btn btn-primary w-25">Incluir</button>
@@ -137,15 +141,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <!-- products information -->
-        <div class="divTable mt-5">
-            <table class="table">
-                <thead>
+        <div class="divTable table-responsive mt-5">
+            <table class="table table-striped table-bordered text-center caption-top">
+                <caption class="text-center fw-bold fs-3" style="color:black;">Cargas cadastradas</caption>
+                <thead class="table-dark">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Descrição</th>
-                        <th scope="col">Valor</th>
+                        <th scope="col">Descrição da carga</th>
+                        <th scope="col">Valor da viagem</th>
                         <th scope="col">Tipo</th>
-                        <th scope="col">...</th>
+                        <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -156,13 +161,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "<td>" .$user_data['descricao']."</td>";
                             echo "<td>" .$user_data['valor']."</td>";
                             echo "<td>" .$user_data['tipo']."</td>";
-                            echo "<td>" .$user_data['acoes']."</td>";
+                            echo "<td>
+                                <a class='btn btn-sm btn-danger' href='delete.php?id=$user_data[id]' title='Deletar'>
+                                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash-fill' viewBox='0 0 16 16'>
+                                            <path d='M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z'/>
+                                    </svg>
+                                </a>
+                            </td>";
+                            echo "</tr>";
                         }
+                        
                     ?>
                 </tbody>
             </table>
         </div>
     </main>
-    <script src="./js/cargas.js"></script>
+    <script src="./js/cadastroCargas.js"></script>
 </body>
 </html>
