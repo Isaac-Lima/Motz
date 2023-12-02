@@ -22,4 +22,4 @@ Esse projeto é de uma empresa de logística responsável pelo transporte de car
 ## ⚙ Atualizações necessárias
 
 - [x] Adicionar a opção de selecionar se o usuário é um embarcador ou motorista na página de cadastro
-- [ ] Criar uma página para os embarcadores adicionarem as cargas (CRUD)
+- [x] Criar uma página para os embarcadores adicionarem as cargas (CRUD)
