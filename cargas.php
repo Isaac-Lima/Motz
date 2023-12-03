@@ -105,6 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
     <main class="container mt-5">
         <!-- rent information -->
+        <h2 class="mb-3 fw-bold">Renda das transações</h2>
         <div class="resume">
             <div class="col">
                 Contêiner: R$ <span class="cont">0.00</span>
@@ -123,6 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
         <!-- input section -->
+        <h2 class="mt-5 mb-3 fw-bold">Cadastrar cargas</h2>
         <form action="cargas.php" method="post">
             <div class="newItem row">
                 <div class="col-lg-3 ">

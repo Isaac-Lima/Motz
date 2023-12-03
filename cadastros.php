@@ -153,7 +153,7 @@ $conexao->close();
                             </div>
 
                             <div class="form-check d-inline-flex">
-                                <input class="form-check-input" type="radio" name="categoria" id="flexRadioMotorista" value="Motorista">
+                                <input class="form-check-input m-1" type="radio" name="categoria" id="flexRadioMotorista" value="Motorista">
                                 <label class="form-check-label" for="flexRadioMotorista">
                                     Motorista
                                 </label>
