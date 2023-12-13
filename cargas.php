@@ -1,6 +1,13 @@
 <?php
-include_once('conexao.php');
+session_start();
 
+// Verifica se o usuário está logado
+if (!isset($_SESSION["logged_in"])) {
+    echo "<script>alert('Você não tem permissão para acessar esta página. Faça login ou registre-se.');</script>";
+    echo "<script>window.location='cadastros.php';</script>";
+}
+
+include_once('conexao.php');
 
 $sql = "SELECT * FROM cargas ORDER BY id DESC";
 
@@ -29,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -94,10 +100,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </ul>
                         <!--Login/Cadastro-->
                         <div class="d-flex flex-column flex-lg-row justify-content-center align-items-center gap-3">
-                            <a href="cadastros.php"
-                                class=" nav-btn text-white text-decoration-none px-3 py-1 rounded-4"
-                                >Cadastro | Login</a>
+                            <a href="logout.php" class=" nav-btn text-white text-decoration-none px-3 py-1 rounded-4">Sair</a>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -188,6 +193,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </table>
         </div>
     </main>
-    <script src="./js/cadastroCargas.js"></script>
+<script src="./js/cadastroCargas.js"></script>
 </body>
 </html>

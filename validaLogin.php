@@ -1,8 +1,5 @@
-
 <?php
 session_start();
-
-// Conexão com o banco de dados
 include_once('conexao.php');
 
 if ($conexao->connect_error) {
@@ -11,16 +8,17 @@ if ($conexao->connect_error) {
 
 // Recupera os dados do formulário
 $email = $_POST['email'];
-$password = $_POST['senha'];
+$senha = $_POST['senha'];
 
 // Consulta SQL para verificar as credenciais
-$sql = "SELECT * FROM cadastro WHERE email = '$email' AND senha = '$password'";
+$sql = "SELECT * FROM cadastro WHERE email = '$email' AND senha = '$senha'";
 $result = $conexao->query($sql);
 
 if ($result->num_rows > 0) {
     // Login bem-sucedido
     $_SESSION['logged_in'] = true;
-    header('location: index.php?');
+    $_SESSION['email'] = $email;
+    header('location: cargas.php');
 } else {
     // Login falhou    
     echo "<script>alert('Email ou senha incorretos');</script>";
@@ -28,4 +26,3 @@ if ($result->num_rows > 0) {
 
 $conexao->close();
 ?>
-

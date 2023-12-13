@@ -47,3 +47,5 @@
         const totalGeral = contTotal + fragilTotal + geralTotal + perigosaTotal;
         totalElt.textContent = totalGeral.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     });
+
+    

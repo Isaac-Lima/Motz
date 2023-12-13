@@ -1,12 +1,9 @@
 <?php
 
-// Inclue a conexão ao banco de dados
+// Inclua a conexão ao banco de dados
 include_once('conexao.php');
 
-
 // Verifica se o formulário foi enviado
-
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se as variáveis do formulário estão definidas
     if (isset($_POST['usuario']) && isset($_POST['email']) && isset($_POST['senha']) && isset($_POST['categoria'])) {
@@ -21,13 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql->bind_param("ssss", $usuario, $email, $senha, $categoria);
 
         if ($sql->execute()) {
-            header('location: index.php?');
-            
+            $sql->close();
+            // Inicia a sessão (se já não estiver iniciada)
+            session_start();
+            // Define as variáveis de sessão
+            $_SESSION['logged_in'] = true;
+            $_SESSION['email'] = $email;
+            // Redireciona para a página após o cadastro
+            header('location: cargas.php');
+            exit();
         } else {
-            echo "Erro ao cadastrar: " . $conn->error;
+            echo "Erro ao cadastrar: " . $conexao->error;
         }
-
-        $sql->close();
     } else {
         echo "Por favor, preencha todos os campos do formulário.";
     }
@@ -35,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conexao->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
